@@ -1,0 +1,39 @@
+{
+  "name": "twitter-kafka-elastic-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+
+    "connection.url": "http://localhost:9200",
+
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    
+    "value.converter.schemas.enable": "false",
+    
+    "schema.ignore":"true",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    
+    "key.converter.schemas.enable": "false",
+
+    "transforms":"InsertKey,ExtractId",
+
+    "transforms.InsertKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
+
+    "transforms.InsertKey.fields":"Id",
+
+    "transforms.ExtractId.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
+
+    "transforms.ExtractId.field":"Id",
+	    
+    "type.name": "type.name=tweet",
+
+    "topics": "twitterDataJson",
+
+    "tasks.max": "1",
+
+    "name": "twitter-kafka-elastic-sink"
+
+
+  }
+}
+
